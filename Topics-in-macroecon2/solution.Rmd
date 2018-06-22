@@ -1,0 +1,354 @@
+---
+title: 'Topics in macroecon'
+author: "LIXINYU|180e203e"
+date: '`r format(Sys.time(), "%d %m, %Y")`'
+output: pdf_document
+---
+
+```{r, messages = FALSE}
+suppressMessages(library("tidyverse"))
+library("tidyverse")
+mpg
+ggplot(data=mpg)+geom_point(mapping = aes(x=displ,y=hwy))
+```
+
+#3.2.4 Excersice problem#
+```{r, message=FALSE}
+ggplot(data = mpg)
+nrow(mpg)
+ncol(mpg)
+?mpg
+mpg
+ggplot(data =mpg)+ geom_point(mapping = aes(x= cyl, y=hwy))
+
+```
+
+```{r, message = FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, color = class))
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, size = class))
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, alpha = class))
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy, shape = class))
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy), color = "blue")
+```
+#3.3.1 Exercise problem#
+```{r, message=FALSE}
+# In the first question, code:color=`blue`, supposed be outside of brackets#
+```
+#3.5 Facets#
+```{r, message=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_wrap(~ class, nrow = 2)
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) + 
+  facet_grid(drv ~ cyl)
+```
+#3.5.1 EXercise#
+```{r,message=FALSE}
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = drv, y = cyl))
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(drv ~ .)
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  facet_grid(. ~ cyl)
+
+```
+#3.6#
+```{r, message=FALSE}
+ggplot(data = mpg) + 
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+ggplot(data = mpg) + 
+  geom_smooth(mapping = aes(x = displ, y = hwy, linetype = drv))
+ggplot(data = mpg) + 
+  geom_point(mapping = aes(x = displ, y = hwy)) +
+  geom_smooth(mapping = aes(x = displ, y = hwy))
+```
+#3.7&3.8#
+```{r, message = FALSE}
+ggplot(data= diamonds)+ geom_bar(mapping = aes(x= cut))
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, colour = cut))
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = cut))
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "fill")
+ggplot(data = diamonds) + 
+  geom_bar(mapping = aes(x = cut, fill = clarity), position = "dodge")
+```
+#5#
+```{r, message = FALSE}
+library(nycflights13)
+nycflights13::flights
+View(flights)
+library(tidyverse)
+```
+#5.1&5.2#
+```{r, message=FALSE}
+View(flights)
+filter(flights, month == 1, day == 1)
+jan1 <- filter(flights, month == 1, day == 1)
+(dec25 <- filter(flights, month == 12, day == 25))
+filter(flights, month == 11 | month == 12)
+nov_dec <- filter(flights, month %in% c(11, 12))
+
+```
+#5.2.4 Excercise#
+```{r, message = FALSE}
+filter(flights, arr_delay >= 120, dep_delay >= 120)
+```
+#5.3#
+```{r, message=FALSE}
+arrange(flights, year, month, day)
+arrange(flights, desc(arr_delay))
+```
+
+#11 Data import#
+```{r, message = FALSE}
+library(tidyverse)
+heights <- read_csv("heights.csv")
+
+read_csv("The first line of metadata
+  The second line of metadata
+  x,y,z
+  1,2,3", skip = 2)
+read_csv("# A comment I want to skip
+  x,y,z
+  1,2,3", comment = "#")
+read_csv("1,2,3\n4,5,6", col_names = c("x", "y", "z"))
+read_csv("a,b,c\n1,2,.", na = ".")
+```
+#11.2.2 Excercise#
+```{r, message = FALSE}
+#The first three of questions, they all got a problem with Value of column names should be indentical to variable names, the fouth one is wrong with confliction on column name and Variable name, the fifth one is not supposed to use $read.csv$ function, it should be $read_tsv$ function #
+```
+#11.3#
+```{r}
+str(parse_logical(c("TRUE", "FALSE", "NA")))
+str(parse_integer(c("1", "2", "3")))
+str(parse_date(c("2010-01-01", "1979-10-14")))
+parse_integer(c("1", "231", ".", "456"), na = ".")
+x <- parse_integer(c("123", "345", "abc", "123.45"))
+x
+problems(x)
+parse_double("1.23")
+parse_double("1,23", locale = locale(decimal_mark = ","))
+parse_number("$100")
+parse_number("20%")
+parse_number("It cost $123.45")
+
+```
+#11.3.4 Dates, date-times, and times#
+```{r}
+parse_datetime("2010-10-01T2010")
+parse_datetime("20101010")
+parse_date("01/02/15","%m/%d/%y")
+parse_date("01/02/15","%d/%m/%y")
+parse_date("01/02/15","%y/%m/%d")
+library(hms)
+parse_time("01:10 am")
+parse_time("20:10:01")
+
+```
+#11.4.2#  
+```{r}
+challenge <- read_csv(readr_example("challenge.csv"))
+problems(challenge)
+challenge <- read_csv(
+  readr_example("challenge.csv"), 
+  col_types = cols(
+    x = col_integer(),
+    y = col_character()
+  )
+)
+write_csv(challenge, "challenge.csv")
+```
+
+#12#
+```{r}
+df <- tibble::tibble(
+  a = rnorm(10),
+  b = rnorm(10),
+  c = rnorm(10),
+  d = rnorm(10)
+)
+
+df$a <- (df$a - min(df$a, na.rm = TRUE)) / 
+  (max(df$a, na.rm = TRUE) - min(df$a, na.rm = TRUE))
+df$b <- (df$b - min(df$b, na.rm = TRUE)) / 
+  (max(df$b, na.rm = TRUE) - min(df$b, na.rm = TRUE))
+df$c <- (df$c - min(df$c, na.rm = TRUE)) / 
+  (max(df$c, na.rm = TRUE) - min(df$c, na.rm = TRUE))
+df$d <- (df$d - min(df$d, na.rm = TRUE)) / 
+  (max(df$d, na.rm = TRUE) - min(df$d, na.rm = TRUE))
+```
+#19#
+```{r, message=FALSE}
+y<-2
+if (y < 0 && debug) {
+  message("Y is negative")
+}
+
+if (y == 0) {
+  log(x)
+} else {
+  y ^ x
+}
+```
+
+#selecet#
+```{r}
+rm(list = ls())
+library(tidyverse)
+library(lubridate)
+data_00 <- read_fwf(file="data_00.dat",  
+                    fwf_cols(year      = c(1, 4),
+                    serial    = c(5,9),
+                    month     = c(10,11),
+                             hwtfinl   = c(12,21),
+                             cpsid     = c(22,35),
+                             asecflag  = c(36,36),
+                             hflag     = c(37,37),
+                             asecwth   = c(38,47),
+                             pernum    = c(48,49),
+                             wtfinl    = c(50,63),
+                             cpsidp    = c(64,77),
+                             asecwt    = c(78,87),
+                             age       = c(88,89),
+                             sex       = c(90,90),
+                             race      = c(91,93),
+                             educ      = c(94,96),
+                             schlcoll  = c(97,97),
+                             indly     = c(98,101),
+                             classwly  = c(102,103),
+                             wkswork1  = c(104,105),
+                             wkswork2  = c(106,106),
+                             fullpart  = c(107,107),
+                             incwage   = c(108,114)),
+                 col_types = cols(year       = "i",
+                                  serial     = "n",
+                                  month      = "i",
+                                  hwtfinl    = "d",
+                                  cpsid      = "d",
+                                  asecflag   = "i",
+                                  hflag      = "i",
+                                  asecwth    = "d",
+                                  pernum     = "i",
+                                  wtfinl     = "d",
+                                  cpsidp     = "d",
+                                  asecwt     = "d",                    
+                                  age        = "i",
+                                  sex        = "i",
+                                  race       = "i",
+                                  educ       = "i",
+                                  schlcoll   = "i",
+                                  indly      = "i",
+                                  classwly   = "i",
+                                  wkswork1   = "i",
+                                  wkswork2   = "i",
+                                  fullpart   = "i",
+                                  incwage    = "n"))
+data_00$hwtfinl = data_00$hwtfinl/10000
+data_00$wtfinl = data_00$wtfinl/10000
+data_00$asecwt = data_00$asecwt/10000
+```
+# merge cpi data (see Acemoglu and Autor's Data Appendix)#
+```{r, message= FALSE}
+data_cpi <- read_csv(file = "data_cpi.csv", col_names = c("year","cpi"), col_types=cols(year = "D", cpi = "d"), skip = 1)
+data_cpi$year <- year(data_cpi$year)
+data_cpi <- data_cpi %>%
+  mutate(price_1982 = ifelse(year == 1982, cpi, 0)) %>% # the base year is 1982 (see Acemoglu and Autor's Data Appendix)
+  mutate(price_1982 = max(price_1982)) %>%
+  mutate(cpi = cpi/price_1982) %>%
+  select(year, cpi)
+data_00 <- data_00 %>%
+  left_join(data_cpi, by = "year")
+data_00 <- data_00 %>%
+  mutate(educ = ifelse(educ == 999, NA, educ)) %>%
+  mutate(classwly = ifelse(classwly == 99, NA, classwly)) %>%  
+  mutate(wkswork2 = ifelse(wkswork2 == 999, NA, wkswork2)) %>%  
+  mutate(incwage = ifelse(incwage == 9999999 | incwage == 9999998, NA, incwage)) %>%
+  mutate(race = ifelse(race == 999, NA, race))
+data_00 <- data_00 %>%
+  mutate(wkswork = ifelse(year >= 1976, wkswork1, NA)) %>%
+  mutate(wkswork = ifelse(year < 1976 & wkswork2 == 1, 7, wkswork)) %>%
+  mutate(wkswork = ifelse(year < 1976 & wkswork2 == 2, 20, wkswork)) %>%
+  mutate(wkswork = ifelse(year < 1976 & wkswork2 == 3, 33, wkswork)) %>%
+  mutate(wkswork = ifelse(year < 1976 & wkswork2 == 4, 43.5, wkswork)) %>%
+  mutate(wkswork = ifelse(year < 1976 & wkswork2 == 5, 48.5, wkswork)) %>%
+  mutate(wkswork = ifelse(year < 1976 & wkswork2 == 6, 51, wkswork))
+data_00 <- data_00 %>%
+  group_by(year) %>%
+  mutate(top_incwage = max(incwage, na.rm = TRUE)) %>%
+  mutate(incwage = ifelse(incwage == top_incwage, 1.45*incwage, incwage)) %>%
+  ungroup()
+data_00 <- data_00 %>%
+  mutate(rwage = incwage/cpi/wkswork) %>%
+  mutate(lrwage = log(rwage))
+data_00 <- data_00 %>%
+  mutate(dfemale = (sex == 2)) # female
+data_00 <- data_00 %>%      
+  mutate(deduc_1 = ifelse(educ < 70, 1, 0)) %>%                # highshool dropout
+  mutate(deduc_2 = ifelse(educ >= 80 & educ < 110, 1, 0)) %>%  # some college
+  mutate(deduc_3 = ifelse(educ >= 110 & educ < 123, 1, 0)) %>% # 4 years college 
+  mutate(deduc_4 = ifelse(educ >= 123, 1, 0))                  # more than college
+data_00 <- data_00 %>%
+  mutate(drace_1 = (race == 200)) %>% # black
+  mutate(drace_2 = (race > 200)) # nonwhite other
+
+```
+# create experience variable: check the IPUMS website for variable definition#
+```{r, message= FALSE}
+data_00 <- data_00 %>%
+  mutate(exp = ifelse(educ == 10, age - 8.5, NA)) %>%
+  mutate(exp = ifelse(educ == 11, age - 7, exp)) %>%
+  mutate(exp = ifelse(educ == 12, age - 8, exp)) %>%
+  mutate(exp = ifelse(educ == 13, age - 9, exp)) %>%
+  mutate(exp = ifelse(educ == 14, age - 10, exp)) %>%
+  mutate(exp = ifelse(educ == 20, age - 11.5, exp)) %>%
+  mutate(exp = ifelse(educ == 21, age - 11, exp)) %>%
+  mutate(exp = ifelse(educ == 22, age - 12, exp)) %>%
+  mutate(exp = ifelse(educ == 30, age - 13.5, exp)) %>%
+  mutate(exp = ifelse(educ == 31, age - 13, exp)) %>%
+  mutate(exp = ifelse(educ == 32, age - 14, exp)) %>%
+  mutate(exp = ifelse(educ == 40, age - 15, exp)) %>%
+  mutate(exp = ifelse(educ == 50, age - 16, exp)) %>%
+  mutate(exp = ifelse(educ == 60, age - 17, exp)) %>%
+  mutate(exp = ifelse(educ == 70, age - 18, exp)) %>%
+  mutate(exp = ifelse(educ == 71, age - 18, exp)) %>%
+  mutate(exp = ifelse(educ == 72, age - 18, exp)) %>%
+  mutate(exp = ifelse(educ == 73, age - 18, exp)) %>%
+  mutate(exp = ifelse(educ == 80, age - 19, exp)) %>%
+  mutate(exp = ifelse(educ == 81, age - 19, exp)) %>%
+  mutate(exp = ifelse(educ == 90, age - 20, exp)) %>%
+  mutate(exp = ifelse(educ == 91, age - 20, exp)) %>%
+  mutate(exp = ifelse(educ == 92, age - 20, exp)) %>%
+  mutate(exp = ifelse(educ == 100, age - 21, exp)) %>%
+  mutate(exp = ifelse(educ == 110, age - 22, exp)) %>%
+  mutate(exp = ifelse(educ == 111, age - 22, exp)) %>%
+  mutate(exp = ifelse(educ == 120, age - 23.5, exp)) %>%
+  mutate(exp = ifelse(educ == 121, age - 23, exp)) %>%
+  mutate(exp = ifelse(educ == 122, age - 24, exp)) %>%
+  mutate(exp = ifelse(educ == 123, age - 23, exp)) %>%
+  mutate(exp = ifelse(educ == 124, age - 23, exp)) %>%
+  mutate(exp = ifelse(educ == 125, age - 27, exp))
+```
+# sample selection (see Katz and Murphy (1992) and Acemoglu and Autor (2011)'s Data Appendix)#
+```{r, message=FALSE}
+data_00 <- data_00 %>%
+  filter(rwage >= 67) %>%                                                       # real wage more than 67 dollars in the 1987 dollar
+  filter(age >= 16 & age <= 64) %>%                                             # age equal or above 16 and equal or less than 64
+  filter(fullpart == 1) %>%                                                     # work more than 35 hours
+  filter(wkswork >= 40) %>%                                                     # work more than 40 weeks
+  filter(classwly != 10 | classwly != 13 | classwly != 14) %>%                  # not self-employed
+  filter(!((year >= 1992 & year <= 2002) & (indly >= 940 & indly <= 960))) %>%  # not in military
+  filter(!(year >= 2003 & indly == 9890)) %>%
+  filter(schlcoll == 5 | year < 1986) %>%                                       # no school attendance
+  filter(exp >= 0)         
+```

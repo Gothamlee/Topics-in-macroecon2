@@ -1,0 +1,35 @@
+---
+title: "Referee report for THE GROWTH OF LOW SKILL SERVICE JOBS AND THE POLARIZATION OF THE U.S. LABOR MARKET"  
+
+author: "LI XINYU| 180E203E"
+date: "2018/06/20"
+output: pdf_document
+fontsize: 20pt 
+geometry: tmargin=3cm,bmargin=3cm,lmargin=3cm,rmargin=3cm
+---
+
+
+#1.Summary
+&nbsp;The referee offer an explaination and empirical analysis of polarization of U.S. employment and wage between $1980-2005$. Authors propose that assumption of polarization attributed to the interaction between consumer preferences and the falling cost of automating routine, codifable jobs.  
+
+&nbsp;The key implication of the model using in this referee , is that continously falling price of computers ultimately causes wage for low-skill labor performing routine task to fall relative to wages for low-skill labor performing manual tasks.  
+&nbsp;Authors use the $1950$ industry mix as an instrumental variable for local labor market specialization in routine tasks in later decades. According to specialization of local labor market in routine activities in $1980$s forward is largely pre-determined by industry structure in $1950$s -which is three decades prior to the era of service occupation growth.  
+
+&nbsp;The extension of special equalibrium setting where local labor markets have differential degrees of specialization in routine-intensive industries, specially, predicts that  $1)$ adopt computer technology and displace workers from routine task-intensive occupation $2)$ undergo employment polarization as low skill labor reallocates into manual task-intensive in person service. $3)$ exhibit larger wage growth at both ends of the occupational skill distribution .$4)$ experience larger net inflows of workers with both high and low education , driven by rising demand for both abstract labor in goods production and manual labor in service prediction.
+
+#2.Main comment
+##2.1 Way of seprating high and low skill
+&nbsp;What I'm not satisfied about model mentioned in this referee is there's not dynamic analysis, the model is overall ideal one in reality, skill labor and unskilled labor should not be judged by their degrees(high-school or undergraduate school), but by skill they majored in, some of majors are not high skilled should be reallocatted into unskilled.  
+
+##2.2 Choosing computer or manual?
+&nbsp;In the referee, "A key implication of the model is that when the elasticity of substitution in production between computer capital and routine labor is higher than the elasticity of the substitution in consumption between goods and services, then the continously falling price of computers ultimately causes wages for low skill labor performing routine tasks to fall relative to wages for skill labor performing manual tasks. "  
+
+&nbsp; Yet it makes sence to me theroetically, What I consider about is the employer would like to keep manaul low-skill labor before the cost of computer converge to the same value of labor wage.  
+
+##2.3 Dynamic model?
+&nbsp;Human capital keeps changing from time to time, there is still possibility for low skill labor to improve.  From human capital accumulation function by BP-model,   <center>$$h_(t+1)=h_t+A(h_ti_t)^\alpha$$</center>  
+&nbsp;$\alpha$:measures the return to scale in investiment,  
+$i_t$: investiment in human capital,  
+$h_t$: period-$t$ human capital,  
+$A$: human capital accumulation technology(ability),   
+&nbsp; It would imply for example that somebody who has high inital human capital will spend less time investing in human capial, which seems unrealistic,  by BP-model , it also implies a convergence in the wage distribution if the only heterogeneity in inital human capital,  but there are something meanful by BP-model, I assume that dynamic human investiment might also causing wage polarization.
